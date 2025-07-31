@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Select Product</title>
+  </head>
+  <body>
+    <h2>Select a Product</h2>
+
+    <!-- Post to ProductServlet -->
+    <form method="post" action="ProductServlet">
+      <label>Product: </label>
+      <select name="product" required>
+        <option value="">-- choose --</option>
+        <option value="Pen">Pen</option>
+        <option value="Notebook">Notebook</option>
+        <option value="Pencil">Pencil</option>
+      </select>
+      <br><br>
+      <input type="submit" value="Next">
+    </form>
+  </body>
+</html>
