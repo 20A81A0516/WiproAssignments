@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
-    "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
         <!-- Database connection settings -->
@@ -9,16 +10,19 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">Rechal@123</property>
         
-        <!-- SQL dialect (MySQL 8) -->
+        <!-- JDBC connection pool settings -->
+        <property name="hibernate.connection.pool_size">5</property>
+        
+        <!-- SQL dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
         
-        <!-- Show SQL in console (helpful for debugging) -->
+        <!-- Echo all executed SQL to stdout -->
         <property name="hibernate.show_sql">true</property>
         
-        <!-- Auto-create/update tables -->
+        <!-- Update the database schema on startup -->
         <property name="hibernate.hbm2ddl.auto">update</property>
         
-        <!-- Entity class mapping (update with your package) -->
+        <!-- Annotated entity classes -->
         <mapping class="com.example.model.Item"/>
     </session-factory>
 </hibernate-configuration>

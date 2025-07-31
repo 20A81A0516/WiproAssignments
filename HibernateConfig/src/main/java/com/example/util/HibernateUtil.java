@@ -1,5 +1,4 @@
-package com.example;
-
+package com.example.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
@@ -12,19 +11,17 @@ public class HibernateUtil {
 
     private static SessionFactory buildSessionFactory() {
         try {
-            // Load hibernate.cfg.xml
-            StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+            StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
                 .configure("hibernate.cfg.xml")
                 .build();
             
-            // Create SessionFactory
-            Metadata metadata = new MetadataSources(registry)
+            Metadata metadata = new MetadataSources(standardRegistry)
                 .getMetadataBuilder()
                 .build();
             
             return metadata.getSessionFactoryBuilder().build();
         } catch (Exception ex) {
-            System.err.println("SessionFactory creation failed: " + ex);
+            System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
         }
     }
@@ -32,7 +29,7 @@ public class HibernateUtil {
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
-    
+
     public static void shutdown() {
         getSessionFactory().close();
     }
