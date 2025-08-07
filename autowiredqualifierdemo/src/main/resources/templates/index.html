@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot Static Resources</title>
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+    <script th:src="@{/js/someScript.js}"></script>
+</head>
+<body>
+    <h1>Welcome to Spring Boot Static Resources</h1>
+    <img th:src="@{/images/soil.png}" alt="Soil Image">
+    <button onclick="showAlert()">Click Me</button>
+</body>
+</html>

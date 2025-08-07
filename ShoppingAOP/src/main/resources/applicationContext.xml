@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- Enable AOP -->
+    <aop:config>
+        <aop:aspect ref="loggingAspect">
+
+            <!-- Pointcut for all methods in ShoppingService -->
+            <aop:pointcut id="shoppingMethods"
+                          expression="execution(* com.example.service.ShoppingService.*(..))"/>
+
+            <aop:before pointcut-ref="shoppingMethods" method="logBefore"/>
+            <aop:after-returning pointcut-ref="shoppingMethods" method="logAfterReturning"/>
+            <aop:after-throwing pointcut-ref="shoppingMethods" method="logAfterThrowing"/>
+            <!-- Optional -->
+            <aop:around pointcut-ref="shoppingMethods" method="logAround"/>
+        </aop:aspect>
+    </aop:config>
+
+    <!-- Beans -->
+    <bean id="shoppingService" class="com.example.service.ShoppingService"/>
+    <bean id="loggingAspect" class="com.example.aspect.LoggingAspect"/>
+</beans>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Enrollment Form</title>
+    <style>
+        .error { color: red; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Enrollment Form</h1>
+    <form th:action="@{/enroll}" th:object="${enrollmentForm}" method="post">
+        
+        <div class="form-group">
+            <label th:text="#{label.firstName}">First Name</label>
+            <input type="text" th:field="*{firstName}">
+            <span class="error" th:if="${#fields.hasErrors('firstName')}" 
+                  th:errors="*{firstName}"></span>
+        </div>
+        
+        <div class="form-group">
+            <label th:text="#{label.lastName}">Last Name</label>
+            <input type="text" th:field="*{lastName}">
+            <span class="error" th:if="${#fields.hasErrors('lastName')}" 
+                  th:errors="*{lastName}"></span>
+        </div>
+        
+        <div class="form-group">
+            <label th:text="#{label.sex}">Sex</label>
+            <div th:each="gender : ${genders}">
+                <input type="radio" th:field="*{sex}" th:value="${gender}">
+                <label th:text="${gender}"></label>
+            </div>
+            <span class="error" th:if="${#fields.hasErrors('sex')}" 
+                  th:errors="*{sex}"></span>
+        </div>
+        
+        <div class="form-group">
+            <label th:text="#{label.dob}">Date of birth</label>
+            <input type="date" th:field="*{dob}">
+            <span class="error" th:if="${#fields.hasErrors('dob')}" 
+                  th:errors="*{dob}"></span>
+        </div>
+        
+        <div class="form-group">
+            <label th:text="#{label.email}">Email</label>
+            <input type="email" th:field="*{email}">
+            <span class="error" th:if="${#fields.hasErrors('email')}" 
+                  th:errors="*{email}"></span>
+        </div>
+        
+        <div class="form-group">
+            <label th:text="#{label.section}">Section</label>
+            <div th:each="section : ${sections}">
+                <input type="radio" th:field="*{section}" th:value="${section}">
+                <label th:text="${section}"></label>
+            </div>
+            <span class="error" th:if="${#fields.hasErrors('section')}" 
+                  th:errors="*{section}"></span>
+        </div>
+        
+        <div class="form-group">
+            <label th:text="#{label.country}">Country</label>
+            <select th:field="*{country}">
+                <option value="">-- Select Country --</option>
+                <option th:each="country : ${countries}" 
+                        th:value="${country}" 
+                        th:text="${country}"></option>
+            </select>
+            <span class="error" th:if="${#fields.hasErrors('country')}" 
+                  th:errors="*{country}"></span>
+        </div>
+        
+        <div class="form-group">
+            <label th:text="#{label.firstAttempt}">First Attempt?</label>
+            <input type="checkbox" th:field="*{firstAttempt}">
+        </div>
+        
+        <div class="form-group">
+            <label th:text="#{label.subjects}">Subjects</label>
+            <div th:each="subject : ${subjectList}">
+                <input type="checkbox" th:field="*{subjects}" th:value="${subject}">
+                <label th:text="${subject}"></label>
+            </div>
+            <span class="error" th:if="${#fields.hasErrors('subjects')}" 
+                  th:errors="*{subjects}"></span>
+        </div>
+        
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
