@@ -1,10 +1,13 @@
 package com.example.restaurant_food_api.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.DecimalMin;
 
 @Entity
+@Table(name = "foods")
 public class Food {
 
     @Id
@@ -15,10 +18,12 @@ public class Food {
     private String name;
 
     @NotNull(message = "Price is required")
+    @DecimalMin(value = "0.01", message = "Price must be greater than 0")
     private Double price;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id")
+    @JsonBackReference
     private Restaurant restaurant;
 
     public Food() {}
@@ -29,22 +34,15 @@ public class Food {
         this.price = price;
         this.restaurant = restaurant;
     }
-
-    // Getters and Setters
-
     public Long getId() { return id; }
-
     public void setId(Long id) { this.id = id; }
 
     public String getName() { return name; }
-
     public void setName(String name) { this.name = name; }
 
     public Double getPrice() { return price; }
-
     public void setPrice(Double price) { this.price = price; }
 
     public Restaurant getRestaurant() { return restaurant; }
-
     public void setRestaurant(Restaurant restaurant) { this.restaurant = restaurant; }
 }

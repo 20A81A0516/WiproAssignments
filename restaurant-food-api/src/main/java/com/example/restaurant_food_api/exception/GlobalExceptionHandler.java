@@ -1,8 +1,12 @@
 package com.example.restaurant_food_api.exception;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.validation.FieldError;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -12,25 +16,39 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleNotFound(ResourceNotFoundException ex) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    public ResponseEntity<ApiErrorResponse> handleNotFound(ResourceNotFoundException ex) {
+        ApiErrorResponse err = new ApiErrorResponse();
+        err.setTimestamp(LocalDateTime.now());
+        err.setStatus(HttpStatus.NOT_FOUND.value());
+        err.setError(HttpStatus.NOT_FOUND.getReasonPhrase());
+        err.setMessage(ex.getMessage());
+        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(org.springframework.web.bind.MethodArgumentNotValidException.class)
-    public ResponseEntity<?> handleValidationError(org.springframework.web.bind.MethodArgumentNotValidException ex) {
-        Map<String, Object> errors = new HashMap<>();
-        errors.put("timestamp", LocalDateTime.now());
-        errors.put("status", HttpStatus.BAD_REQUEST.value());
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiErrorResponse> handleValidation(MethodArgumentNotValidException ex) {
+        ApiErrorResponse err = new ApiErrorResponse();
+        err.setTimestamp(LocalDateTime.now());
+        err.setStatus(HttpStatus.BAD_REQUEST.value());
+        err.setError(HttpStatus.BAD_REQUEST.getReasonPhrase());
+        err.setMessage("Validation failed");
 
         Map<String, String> fieldErrors = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(err ->
-            fieldErrors.put(err.getField(), err.getDefaultMessage())
-        );
-        errors.put("errors", fieldErrors);
+        for (FieldError fe : ex.getBindingResult().getFieldErrors()) {
+            fieldErrors.put(fe.getField(), fe.getDefaultMessage());
+        }
+        err.setFieldErrors(fieldErrors);
 
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiErrorResponse> handleAll(Exception ex) {
+        ApiErrorResponse err = new ApiErrorResponse();
+        err.setTimestamp(LocalDateTime.now());
+        err.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        err.setError(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+        err.setMessage(ex.getMessage());
+        return new ResponseEntity<>(err, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

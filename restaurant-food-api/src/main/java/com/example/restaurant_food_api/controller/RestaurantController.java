@@ -2,62 +2,64 @@ package com.example.restaurant_food_api.controller;
 
 import com.example.restaurant_food_api.entity.Food;
 import com.example.restaurant_food_api.entity.Restaurant;
-import com.example.restaurant_food_api.exception.ResourceNotFoundException;
-import com.example.restaurant_food_api.repository.FoodRepository;
-import com.example.restaurant_food_api.repository.RestaurantRepository;
+import com.example.restaurant_food_api.service.FoodService;
+import com.example.restaurant_food_api.service.RestaurantService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/grocery")
+@RequestMapping("/api/restaurants")
 public class RestaurantController {
 
-    @Autowired
-    private RestaurantRepository restaurantRepo;
+    private final RestaurantService restaurantService;
+    private final FoodService foodService;
 
-    @Autowired
-    private FoodRepository foodRepo;
+    public RestaurantController(RestaurantService restaurantService, FoodService foodService) {
+        this.restaurantService = restaurantService;
+        this.foodService = foodService;
+    }
 
+    // Create restaurant
     @PostMapping
-    public Restaurant createRestaurant(@Valid @RequestBody Restaurant restaurant) {
-        return restaurantRepo.save(restaurant);
+    public ResponseEntity<Restaurant> createRestaurant(@Valid @RequestBody Restaurant restaurant) {
+        Restaurant saved = restaurantService.create(restaurant);
+        return ResponseEntity.created(URI.create("/api/restaurants/" + saved.getId())).body(saved);
     }
 
+    // Get all
     @GetMapping
-    public List<Restaurant> getAllRestaurants() {
-        return restaurantRepo.findAll();
+    public List<Restaurant> getAll() {
+        return restaurantService.getAll();
     }
 
+    // Get by id
     @GetMapping("/{id}")
-    public Restaurant getRestaurantById(@PathVariable Long id) {
-        return restaurantRepo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Restaurant not found with id: " + id));
+    public Restaurant getById(@PathVariable Long id) {
+        return restaurantService.getById(id);
     }
 
+    // Delete restaurant
     @DeleteMapping("/{id}")
-    public void deleteRestaurant(@PathVariable Long id) {
-        if (!restaurantRepo.existsById(id)) {
-            throw new ResourceNotFoundException("Restaurant not found with id: " + id);
-        }
-        restaurantRepo.deleteById(id);
+    public ResponseEntity<Void> deleteRestaurant(@PathVariable Long id) {
+        restaurantService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
+    // Add food to restaurant
     @PostMapping("/{id}/foods")
-    public Food addFoodToRestaurant(@PathVariable Long id, @Valid @RequestBody Food food) {
-        Restaurant restaurant = restaurantRepo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Restaurant not found with id: " + id));
-        food.setRestaurant(restaurant);
-        return foodRepo.save(food);
+    public ResponseEntity<Food> addFood(@PathVariable Long id, @Valid @RequestBody Food food) {
+        Food saved = foodService.addFoodToRestaurant(id, food);
+        return ResponseEntity.created(URI.create("/api/restaurants/foods/" + saved.getId())).body(saved);
     }
 
+    // Delete food by id
     @DeleteMapping("/foods/{foodId}")
-    public void deleteFood(@PathVariable Long foodId) {
-        if (!foodRepo.existsById(foodId)) {
-            throw new ResourceNotFoundException("Food not found with id: " + foodId);
-        }
-        foodRepo.deleteById(foodId);
+    public ResponseEntity<Void> deleteFood(@PathVariable Long foodId) {
+        foodService.deleteFood(foodId);
+        return ResponseEntity.noContent().build();
     }
 }

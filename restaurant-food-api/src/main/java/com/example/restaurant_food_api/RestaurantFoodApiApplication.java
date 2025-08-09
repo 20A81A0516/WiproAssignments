@@ -13,13 +13,11 @@ public class RestaurantFoodApiApplication {
 }
 
 
-/*GET all → http://localhost:8080/api/grocery
-
-POST (with JSON body) → http://localhost:8080/api/grocery
-
-GET by id → http://localhost:8080/api/grocery/1
-
-PUT by id → http://localhost:8080/api/grocery/1
-
-DELETE by id → http://localhost:8080/api/grocery/1
+/*
+POST http://localhost:8080/api/restaurants
+GET http://localhost:8080/api/restaurants
+GET http://localhost:8080/api/restaurants/1
+DELETE http://localhost:8080/api/restaurants/1
+POST http://localhost:8080/api/restaurants/1/foods
+DELETE http://localhost:8080/api/restaurants/foods/5
 */
