@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+                             http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+
+    <!-- Filter -->
+    <filter>
+        <filter-name>TransactionLoggingFilter</filter-name>
+        <filter-class>com.example.filter.TransactionLoggingFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>TransactionLoggingFilter</filter-name>
+        <url-pattern>/transaction</url-pattern>
+    </filter-mapping>
+
+    <!-- Servlet -->
+    <servlet>
+        <servlet-name>TransactionServlet</servlet-name>
+        <servlet-class>com.example.filter.TransactionServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TransactionServlet</servlet-name>
+        <url-pattern>/transaction</url-pattern>
+    </servlet-mapping>
+
+</web-app>
