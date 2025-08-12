@@ -17,3 +17,7 @@ public class OrderServiceApplication {
         return new RestTemplate();
     }
 }
+
+
+
+//GET http://localhost:8081/order

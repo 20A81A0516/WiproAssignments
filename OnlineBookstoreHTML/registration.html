@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Online Conferences Registration Form</title>
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif; background:#fff; color:#111;">
+
+  <h1 style="text-align:center; margin-top:18px; letter-spacing:1px;">
+    ONLINE CONFERENCES REGISTRATION FORM
+  </h1>
+
+  <!-- Main form container (table-based layout inside) -->
+  <div style="display:flex; justify-content:center; margin:12px;">
+    <form id="regForm" action="#" method="post" enctype="multipart/form-data"
+          style="width:760px; border:1px solid #444; padding:14px; box-sizing:border-box;">
+
+      <table style="width:100%; border-collapse:collapse;">
+
+        <tr>
+          <td colspan="2" style="padding:8px; font-size:18px; font-weight:600; border-bottom:1px solid #ccc;">
+            Personal Information
+          </td>
+        </tr>
+
+        <tr>
+          <td style="width:34%; padding:8px; vertical-align:top;">Full Name</td>
+          <td style="padding:8px;">
+            <input id="fullName" name="fullName" type="text" style="width:98%; padding:6px;"/>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:8px; vertical-align:top;">
+            Email Address<br>
+            <small style="color:#666;">format: user@example.com</small>
+          </td>
+          <td style="padding:8px;">
+            <input id="email" name="email" type="text" style="width:98%; padding:6px;"/>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:8px; vertical-align:top;">Gender</td>
+          <td style="padding:8px;">
+            <label><input type="radio" name="gender" value="Male"> Male</label>
+            <label style="margin-left:12px;"><input type="radio" name="gender" value="Female"> Female</label>
+            <label style="margin-left:12px;"><input type="radio" name="gender" value="Other"> Other</label>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:8px; vertical-align:top;">Country</td>
+          <td style="padding:8px;">
+            <select id="country" name="country" style="width:100%; padding:6px;">
+              <option value="">--Select--</option>
+              <option value="India">India</option>
+              <option value="United States">United States</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="Canada">Canada</option>
+              <option value="Australia">Australia</option>
+              <option value="Germany">Germany</option>
+              <option value="France">France</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:8px; vertical-align:top;">Profile Photo Upload</td>
+          <td style="padding:8px;">
+            <input id="photo" name="photo" type="file" accept="image/*" />
+            <div style="color:#666; font-size:12px; margin-top:4px;">(optional: png/jpg/jpeg)</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2" style="padding:8px; font-size:18px; font-weight:600; border-top:1px solid #ccc; border-bottom:1px solid #ccc; margin-top:8px;">
+            Account Preferences
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:8px; vertical-align:top;">Username</td>
+          <td style="padding:8px;">
+            <input id="username" name="username" type="text" style="width:98%; padding:6px;"/>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:8px; vertical-align:top;">Password</td>
+          <td style="padding:8px;">
+            <input id="password" name="password" type="password" style="width:98%; padding:6px;"/>
+            <div style="color:#666; font-size:12px;">(min 6 characters)</div>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:8px; vertical-align:top;">Confirm Password</td>
+          <td style="padding:8px;">
+            <input id="confirmPassword" name="confirmPassword" type="password" style="width:98%; padding:6px;"/>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:8px; vertical-align:top;">Interests</td>
+          <td style="padding:8px;">
+            <label><input type="checkbox" name="interest" value="Web Dev"> Web Development</label>
+            <label style="margin-left:10px;"><input type="checkbox" name="interest" value="AI"> AI</label>
+            <label style="margin-left:10px;"><input type="checkbox" name="interest" value="Cloud"> Cloud</label>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:8px; vertical-align:top;">Preferred Contact Method</td>
+          <td style="padding:8px;">
+            <label><input type="radio" name="contactMethod" value="Email"> Email</label>
+            <label style="margin-left:12px;"><input type="radio" name="contactMethod" value="Phone"> Phone</label>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:8px; vertical-align:top;">Special Requirements / Comments</td>
+          <td style="padding:8px;">
+            <textarea id="comments" name="comments" rows="4" style="width:98%; padding:6px;"></textarea>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2" style="padding:8px; font-size:18px; font-weight:600; border-top:1px solid #ccc; border-bottom:1px solid #ccc; margin-top:8px;">
+            Payment Details
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:8px; vertical-align:top;">Payment Method</td>
+          <td style="padding:8px;">
+            <select id="paymentMethod" name="paymentMethod" style="width:100%; padding:6px;">
+              <option value="">--Select--</option>
+              <option value="Credit Card">Credit Card</option>
+              <option value="Debit Card">Debit Card</option>
+              <option value="PayPal">PayPal</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:8px; vertical-align:top;">Card Number</td>
+          <td style="padding:8px;">
+            <input id="cardNumber" name="cardNumber" type="text" style="width:98%; padding:6px;" placeholder="numbers only, no spaces"/>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:8px; vertical-align:top;">Expiry Date</td>
+          <td style="padding:8px;">
+            <select id="expMonth" name="expMonth" style="padding:6px;">
+              <option value="">Month</option>
+              <option>01</option><option>02</option><option>03</option><option>04</option><option>05</option><option>06</option>
+              <option>07</option><option>08</option><option>09</option><option>10</option><option>11</option><option>12</option>
+            </select>
+
+            <select id="expYear" name="expYear" style="padding:6px; margin-left:8px;">
+              <option value="">Year</option>
+              <!-- next 10 years -->
+              <script>/* placeholder; replaced by JS below when script runs */</script>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:8px; vertical-align:top;">CVV</td>
+          <td style="padding:8px;">
+            <input id="cvv" name="cvv" type="password" maxlength="3" size="3" style="padding:6px; width:80px;" placeholder="123"/>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:8px; vertical-align:middle;">Terms &amp; Conditions</td>
+          <td style="padding:8px;">
+            <label><input id="terms" name="terms" type="checkbox"> I agree to Terms</label>
+          </td>
+        </tr>
+
+        <!-- Buttons -->
+        <tr>
+          <td style="padding:8px;"></td>
+          <td style="padding:8px;">
+            <input type="submit" value="Submit" style="padding:8px 12px;"/>
+            <input id="resetBtn" type="reset" value="Reset" style="padding:8px 12px; margin-left:8px;"/>
+          </td>
+        </tr>
+
+      </table>
+    </form>
+  </div>
+
+  <!-- Where we show results after validation -->
+  <div id="result" style="width:760px; margin:6px auto; color:green; font-weight:600;"></div>
+
+  <script>
+    (function populateYears(){
+      var sel = document.getElementById('expYear');
+      var y = (new Date()).getFullYear();
+      for(var i=0;i<11;i++){
+        var opt = document.createElement('option');
+        opt.value = y + i;
+        opt.text = y + i;
+        sel.appendChild(opt);
+      }
+    })();
+
+    function getCheckedValue(name){
+      var r = document.getElementsByName(name);
+      for(var i=0;i<r.length;i++){
+        if(r[i].checked) return r[i].value;
+      }
+      return "";
+    }
+
+    document.getElementById('regForm').addEventListener('submit', function(evt){
+      evt.preventDefault();
+      
+      var fullName = document.getElementById('fullName').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var gender = getCheckedValue('gender');
+      var country = document.getElementById('country').value;
+      var username = document.getElementById('username').value.trim();
+      var pass = document.getElementById('password').value;
+      var confirmPass = document.getElementById('confirmPassword').value;
+      var paymentMethod = document.getElementById('paymentMethod').value;
+      var cardNumber = document.getElementById('cardNumber').value.replace(/\s+/g,'');
+      var expMonth = document.getElementById('expMonth').value;
+      var expYear = document.getElementById('expYear').value;
+      var cvv = document.getElementById('cvv').value;
+      var termsChecked = document.getElementById('terms').checked;
+
+      if(!fullName){
+        alert('Please enter Full Name.');
+        document.getElementById('fullName').focus();
+        return;
+      }
+
+      var emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+      if(!email || !emailRegex.test(email)){
+        alert('Please enter a valid Email in format user@example.com');
+        document.getElementById('email').focus();
+        return;
+      }
+
+      if(!gender){
+        alert('Please select Gender.');
+        return;
+      }
+
+      if(!country){
+        alert('Please select Country.');
+        document.getElementById('country').focus();
+        return;
+      }
+
+      if(!username){
+        alert('Please enter Username.');
+        document.getElementById('username').focus();
+        return;
+      }
+
+      if(!pass || pass.length < 6){
+        alert('Please enter a Password (minimum 6 characters).');
+        document.getElementById('password').focus();
+        return;
+      }
+
+      if(pass !== confirmPass){
+        alert('Password and Confirm Password do not match.');
+        document.getElementById('confirmPassword').focus();
+        return;
+      }
+
+      if(!paymentMethod){
+        alert('Please select Payment Method.');
+        document.getElementById('paymentMethod').focus();
+        return;
+      }
+
+      if(paymentMethod === 'Credit Card' || paymentMethod === 'Debit Card'){
+        if(!/^[0-9]{12,19}$/.test(cardNumber)){
+          alert('Enter a valid Card Number (12-19 digits).');
+          document.getElementById('cardNumber').focus();
+          return;
+        }
+        if(!expMonth || !expYear){
+          alert('Please select Expiry Month and Year.');
+          return;
+        }
+        if(!/^[0-9]{3}$/.test(cvv)){
+          alert('Enter a valid 3-digit CVV.');
+          document.getElementById('cvv').focus();
+          return;
+        }
+        var expDate = new Date(parseInt(expYear,10), parseInt(expMonth,10)-1, 1);
+        var now = new Date();
+        if(expDate < new Date(now.getFullYear(), now.getMonth(), 1)){
+          alert('Card expiry appears to be in the past.');
+          return;
+        }
+      }
+
+      if(!termsChecked){
+        alert('You must agree to Terms & Conditions to proceed.');
+        return;
+      }
+      var photoInput = document.getElementById('photo');
+      var photoName = (photoInput.files && photoInput.files.length) ? photoInput.files[0].name : 'No file chosen';
+
+      var out = '<div style="padding:8px; border:1px solid #7bbf7b; background:#eef9ee;">';
+      out += '<strong>Registration successful!</strong><br>';
+      out += 'Name: ' + fullName + '<br>';
+      out += 'Email: ' + email + '<br>';
+      out += 'Country: ' + country + '<br>';
+      out += 'Username: ' + username + '<br>';
+      out += 'Payment Method: ' + paymentMethod + '<br>';
+      out += 'Uploaded Photo: ' + photoName + '<br>';
+      out += '</div>';
+
+      document.getElementById('result').innerHTML = out;
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', function(){
+      document.getElementById('result').innerHTML = '';
+    });
+  </script>
+
+</body>
+</html>

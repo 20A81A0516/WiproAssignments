@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Online Grocery Order</title>
+</head>
+<body>
+<main>
+  <h2>Online Grocery Order</h2>
+
+  <!-- Form: submits to order.php using POST -->
+  <form action="order.php" method="post" autocomplete="on">
+
+    <!-- Customer Details -->
+    <fieldset>
+      <legend>Customer Details</legend>
+
+      <div class="row">
+        <div class="col">
+          <label for="fullName">Full Name <span class="muted">*</span></label>
+          <input type="text" id="fullName" name="fullName" required autofocus>
+        </div>
+
+        <div class="col">
+          <label for="email">Email <span class="muted">*</span></label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <div class="col">
+          <label for="mobile">Mobile Number</label>
+          <input type="tel" id="mobile" name="mobile" placeholder="9876543210" pattern="[0-9]{10}" title="Enter a 10-digit mobile number (digits only)" maxlength="10" inputmode="numeric">
+          <div class="muted">Pattern: 10 digits. (optional)</div>
+        </div>
+
+        <div class="col">
+          <label for="address">Delivery Address <span class="muted">*</span></label>
+          <textarea id="address" name="address" rows="3" placeholder="Flat/House no, Street, City, State, PIN" required></textarea>
+        </div>
+      </div>
+
+    </fieldset>
+
+    <!-- Order Details -->
+    <fieldset>
+      <legend>Order Details</legend>
+
+      <div>
+        <label>Grocery Items</label>
+        <div class="checkbox-grid" role="group" aria-labelledby="items-label">
+          <label><input type="checkbox" name="items[]" value="Rice"> Rice</label>
+          <label><input type="checkbox" name="items[]" value="Milk"> Milk</label>
+          <label><input type="checkbox" name="items[]" value="Bread"> Bread</label>
+          <label><input type="checkbox" name="items[]" value="Eggs"> Eggs</label>
+          <label><input type="checkbox" name="items[]" value="Sugar"> Sugar</label>
+          <label><input type="checkbox" name="items[]" value="Pulses"> Pulses</label>
+        </div>
+        <div class="muted" style="margin-top:6px">Tip: you can select multiple items.</div>
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <div class="col">
+          <label for="quantity">Quantity <span class="muted">(min 1 — max 10)</span></label>
+          <input type="number" id="quantity" name="quantity" min="1" max="10" value="1">
+        </div>
+
+        <div class="col">
+          <label for="deliveryDate">Delivery Date <span class="muted">*</span></label>
+          <input type="date" id="deliveryDate" name="deliveryDate" required>
+        </div>
+
+        <div class="col">
+          <label for="deliveryTime">Preferred Delivery Time</label>
+          <input type="time" id="deliveryTime" name="deliveryTime">
+        </div>
+      </div>
+
+      <div style="margin-top:12px">
+        <label>Payment Method</label>
+        <div style="display:flex;gap:16px;margin-top:6px">
+          <label><input type="radio" name="paymentMethod" value="cod" checked> Cash on Delivery</label>
+          <label><input type="radio" name="paymentMethod" value="upi"> UPI</label>
+          <label><input type="radio" name="paymentMethod" value="card"> Card</label>
+        </div>
+      </div>
+
+      <div style="margin-top:12px">
+        <label for="specialInstructions">Special Instructions</label>
+        <textarea id="specialInstructions" name="specialInstructions" rows="3" placeholder="e.g. Please ring the bell / Leave at doorstep (optional)"></textarea>
+      </div>
+
+      <div style="margin-top:12px;display:flex;align-items:center;gap:8px">
+        <input type="checkbox" id="confirm" name="confirm" required>
+        <label for="confirm">I confirm my order <span class="muted">*</span></label>
+      </div>
+
+      <div class="actions">
+        <button type="reset">Reset</button>
+        <button type="submit">Submit Order</button>
+      </div>
+
+    </fieldset>
+
+  </form>
+
+  <p class="muted" style="margin-top:12px">Fields marked with * are required. This form posts to <code>order.php</code> using the POST method.</p>
+</main>
+</body>
+</html>

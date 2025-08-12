@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HTML5 Multimedia Lab</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; max-width:800px; margin:30px auto; padding:0 12px; }
+    h1 { border-bottom:2px solid #ddd; padding-bottom:6px; }
+    .media { border:1px solid #ddd; padding:12px; margin:16px 0; background:#fafafa; }
+    .label { font-weight:700; margin-bottom:6px; display:block; }
+    .small { font-size:90%; color:#555; margin-top:6px; }
+  </style>
+</head>
+<body>
+  <h1>HTML5 Multimedia Lab</h1>
+  <p class="small">This page demonstrates video, audio, embed (PDF), iframe, and inline SVG.</p>
+
+  <div class="media">
+    <span class="label">Video (sample.mp4)</span>
+    <!-- Use a real mp4 file in the folder named sample.mp4 or use the external example URL below -->
+    <video controls width="720" height="405" poster="poster.jpg">
+      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+      <!-- fallback to an example online file (optional) -->
+      <!-- <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4"> -->
+      Your browser does not support the video element.
+    </video>
+  </div>
+
+  <div class="media">
+    <span class="label">Audio (sample.mp3)</span>
+    <audio controls preload="none">
+      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    <div class="small">Use controls to play/pause. (loop attribute example: &lt;audio controls loop&gt; )</div>
+  </div>
+
+  <div class="media">
+    <span class="label">Embed (document.pdf)</span>
+    <!-- embed PDF; if it doesn't display, browser will show the fallback link -->
+    <embed src="document.pdf" type="application/pdf" width="720" height="360">
+    <div class="small">If PDF does not appear, <a href="document.pdf" download>download document.pdf</a>.</div>
+  </div>
+
+  <div class="media">
+    <span class="label">Iframe (demo.html)</span>
+    <iframe src="demo.html" width="720" height="200" title="demo iframe"></iframe>
+    <div class="small">This shows another HTML file inside an iframe.</div>
+  </div>
+
+  <div class="media">
+    <span class="label">Inline SVG</span>
+    <!-- Simple inline SVG -->
+    <svg width="720" height="120" role="img" aria-label="Simple SVG sample">
+      <rect x="0" y="0" width="720" height="120" fill="#fff"/>
+      <rect x="8"  y="8"  width="120" height="104" fill="#e6e6e6" stroke="#999"/>
+      <circle cx="200" cy="60" r="40" fill="#f44336"/>
+      <text x="260" y="68" font-family="Arial" font-size="20" fill="#222">Inline SVG Preview</text>
+    </svg>
+  </div>
+
+</body>
+</html>

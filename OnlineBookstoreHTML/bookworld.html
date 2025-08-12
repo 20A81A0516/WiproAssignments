@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BookWorld - Your Online Bookstore</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+      color: #222;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 28px auto;
+      padding: 0 18px;
+    }
+    .banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 6px;
+    }
+    h1 { font-size: 2.4rem; margin: 18px 0 6px; }
+    .lead { font-size: 1.05rem; color: #444; margin-bottom: 18px; }
+
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+    th { background: #f4f4f4; }
+
+    .grid { display: flex; gap: 36px; align-items: flex-start; margin: 20px 0; }
+    .col { flex: 1; min-width: 200px; }
+    
+    .video-wrap iframe { width: 100%; height: 300px; border: 0; border-radius: 6px; }
+
+    form { border: 1px solid #e0e0e0; padding: 14px; border-radius: 6px; background: #fafafa; }
+    .form-row { margin-bottom: 10px; }
+    label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.95rem; }
+    input[type="text"], input[type="email"], select, textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #cfcfcf;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    input[type="submit"] {
+      background: #333;
+      color: #fff;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .links a { margin-right: 14px; color: #0645ad; text-decoration: none; }
+    footer { margin-top: 28px; padding-top: 14px; border-top: 1px solid #eee; color: #666; font-size: 0.9rem; }
+
+    @media (max-width: 780px) {
+      .grid { flex-direction: column; }
+      .video-wrap iframe { height: 200px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Banner image (placeholder). Replace src with local file path if you save a local image) -->
+    <div class="banner">
+      <img src="images/bookworld banner.jpg" alt="BookWorld banner - stack of books" />
+    </div>
+
+    <h1>Welcome to BookWorld</h1>
+    <p class="lead">
+      BookWorld is a premier online bookstore offering a wide selection of fiction,
+      non-fiction, children's books and science titles. Browse best-sellers,
+      discover upcoming releases, and sign up for our newsletter.
+    </p>
+
+    <h2>Book Categories</h2>
+    <table aria-label="Book categories table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Number of Books</th>
+          <th>Top Author</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Fiction</td><td>2,345</td><td>J.K. Rowling</td></tr>
+        <tr><td>Non-Fiction</td><td>1,789</td><td>Malcolm Gladwell</td></tr>
+        <tr><td>Children's</td><td>1,234</td><td>Roald Dahl</td></tr>
+        <tr><td>Science</td><td>980</td><td>Stephen Hawking</td></tr>
+      </tbody>
+    </table>
+
+    <div class="grid" style="margin-top:20px;">
+      <div class="col">
+        <h2>Best-Sellers</h2>
+        <ol>
+          <li>The Great Gatsby — F. Scott Fitzgerald</li>
+          <li>To Kill a Mockingbird — Harper Lee</li>
+          <li>1984 — George Orwell</li>
+          <li>The Catcher in the Rye — J. D. Salinger</li>
+          <li>The Hobbit — J.R.R. Tolkien</li>
+        </ol>
+      </div>
+
+      <div class="col">
+        <h2>Upcoming Releases</h2>
+        <ul>
+          <li>The Midnight Library</li>
+          <li>Project Hail Mary</li>
+          <li>The Four Winds</li>
+          <li>Kiara and the Sun</li>
+          <li>The Lincoln Highway</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Book Preview</h2>
+    <p>Watch a short preview video below.</p>
+    <div class="video-wrap">
+      <!-- sample YouTube embed; this is a public test video id used in many demos -->
+      <iframe src="https://www.youtube.com/embed/BDquN_pD_Pc"
+              title="Book preview"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+
+    <h2 style="margin-top:18px;">Newsletter Signup / Registration Form</h2>
+    <div class="grid">
+      <div class="col">
+
+        <form action="#" method="get" novalidate>
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required>
+          </div>
+
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required>
+          </div>
+
+          <div class="form-row">
+            <label for="genre">Favorite Genre</label>
+            <select id="genre" name="genre" required>
+              <option value="Fiction">Fiction</option>
+              <option value="Non-Fiction">Non-Fiction</option>
+              <option value="Children">Children's</option>
+              <option value="Science">Science</option>
+              <option value="SelfHelp">Self-Help</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="comments">Comments</label>
+            <textarea id="comments" name="comments" rows="4" placeholder="Tell us what you like..."></textarea>
+          </div>
+
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+
+      <div class="col">
+        <img src="images/research-banner.jpg" alt="Book preview image" style="width:100%; border-radius:6px; display:block; margin-bottom:8px;">
+        <p>Subscribe to our newsletter for new-book alerts, promotions, and author interviews.</p>
+      </div>
+    </div>
+
+    <h2>Links</h2>
+    <p class="links">
+      <a href="https://www.goodreads.com" target="_blank" rel="noopener noreferrer">Goodreads (opens new tab)</a>
+      <a href="https://www.gutenberg.org" target="_blank" rel="noopener noreferrer">Project Gutenberg</a>
+      <a href="https://www.bookbub.com" target="_blank" rel="noopener noreferrer">BookBub</a>
+    </p>
+
+    <h2>Contact Info</h2>
+    <p>
+      BookWorld HQ<br>
+      123 Paper Street, Booktown, BK 56789<br>
+      Phone: <a href="tel:+911234567890">+91 12345 67890</a><br>
+      Email: <a href="mailto:info@bookworld.example">info@bookworld.example</a>
+    </p>
+
+    <footer>
+      <p>© 2025 BookWorld — All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>

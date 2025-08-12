@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Website Feedback Survey</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Website Feedback Survey</h1>
+      <p class="subtitle">We value your opinion. Please take a minute to share your thoughts.</p>
+    </div>
+    <nav aria-label="Main navigation">
+      <ul class="nav">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container content">
+    <main>
+      <form id="surveyForm">
+        <!-- Section 1: Personal Info -->
+        <section aria-labelledby="personal-heading">
+          <h2 id="personal-heading">Personal Information</h2>
+          <fieldset>
+            <label for="fullname">Full Name *</label>
+            <input id="fullname" name="fullname" type="text" required placeholder="Your full name" />
+
+            <label for="email">Email Address *</label>
+            <input id="email" name="email" type="email" required placeholder="name@example.com" />
+
+            <label for="age">Age</label>
+            <input id="age" name="age" type="number" min="10" max="100" placeholder="10 - 100" />
+          </fieldset>
+        </section>
+
+        <section aria-labelledby="rating-heading">
+          <h2 id="rating-heading">Website Rating</h2>
+          <fieldset>
+            <label for="designRating">Design (1–10)</label>
+            <input id="designRating" name="designRating" type="range" min="1" max="10" value="5" />
+
+            <p>Content Quality</p>
+            <label><input type="radio" name="contentQuality" value="Excellent" checked /> Excellent</label>
+            <label><input type="radio" name="contentQuality" value="Good" /> Good</label>
+            <label><input type="radio" name="contentQuality" value="Average" /> Average</label>
+            <label><input type="radio" name="contentQuality" value="Poor" /> Poor</label>
+
+            <label for="mostVisited">Most visited page</label>
+            <select id="mostVisited" name="mostVisited">
+              <option value="Home">Home</option>
+              <option value="Blog">Blog</option>
+              <option value="Products">Products</option>
+              <option value="Contact">Contact</option>
+            </select>
+          </fieldset>
+        </section>
+
+        <section aria-labelledby="suggestions-heading">
+          <h2 id="suggestions-heading">Suggestions</h2>
+          <fieldset>
+            <label for="comments">Comments / Suggestions</label>
+            <textarea id="comments" name="comments" rows="5" placeholder="Write your suggestions here..."></textarea>
+
+            <label class="checkbox">
+              <input type="checkbox" id="contactMe" name="contactMe" value="yes" />
+              I agree to be contacted regarding my feedback
+            </label>
+          </fieldset>
+        </section>
+
+        <p class="form-actions">
+          <button type="submit">Submit</button>
+          <button type="reset">Reset</button>
+        </p>
+      </form>
+    </main>
+
+    <aside>
+      <div class="aside-box">
+        <h3>Why your feedback matters</h3>
+        <p>Your feedback helps us improve our website experience for everyone. Thank you!</p>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 Website Survey</p>
+    </div>
+  </footer>
+  <script>
+    document.getElementById('surveyForm').addEventListener('submit', function (e) {
+      e.preventDefault(); 
+      const fd = new FormData(this);
+      const obj = {};
+      fd.forEach((value, key) => {
+        if (obj[key]) {
+          if (!Array.isArray(obj[key])) obj[key] = [obj[key]];
+          obj[key].push(value);
+        } else {
+          obj[key] = value;
+        }
+      });
+      alert('Thank you! Your response was captured. Check the browser console for details.');
+      console.log('Survey submission:', obj);
+    });
+  </script>
+</body>
+</html>

@@ -10,3 +10,9 @@ public class PaymentServiceApplication {
         SpringApplication.run(PaymentServiceApplication.class, args);
     }
 }
+
+
+
+//GET http://localhost:8082/payment
+
+//http://localhost:9411 
