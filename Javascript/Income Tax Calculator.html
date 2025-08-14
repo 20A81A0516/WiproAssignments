@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Income Tax Calculator (Multiple Callbacks)</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="card">
+    <h1>Income Tax Calculator<br/><small>(Multiple Callbacks)</small></h1>
+
+    <form id="taxForm">
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="e.g., Arjun R" required/>
+
+      <label for="pan">PAN</label>
+      <input type="text" id="pan" placeholder="e.g., ABCDE1234F" required/>
+
+      <label for="income">Annual Income</label>
+      <input type="number" id="income" min="0" step="1000" placeholder="e.g., 750000" required/>
+
+      <button type="button" id="calcBtn">Calculate Tax</button>
+    </form>
+
+    <pre id="output" class="output"></pre>
+
+    <h2>Saved Records (JSON)</h2>
+    <pre id="records" class="output small"></pre>
+  </div>
+
+  <script>
+    const records = []; 
+    const inr = (n) => '₹ ' + Number(n).toLocaleString('en-IN');
+
+    function calculateTax(income) {
+      let tax = 0;
+      if (income <= 250000) {
+        tax = 0;
+      } else if (income <= 500000) {
+        tax = (income - 250000) * 0.05;
+      } else if (income <= 1000000) {
+        tax = (250000 * 0.05) + (income - 500000) * 0.20;
+      } else {
+        tax = (250000 * 0.05) + (500000 * 0.20) + (income - 1000000) * 0.30;
+      }
+      return Math.round(tax);
+    }
+
+    function processTax(name, pan, income, callback) {
+      const tax = calculateTax(income);
+      const result = {
+        name,
+        pan,
+        income,
+        tax,
+        netIncome: income - tax,
+        time: new Date().toISOString()
+      };
+      callback(result); 
+    }
+
+    function handleResult(result) {
+      logToConsole(result);
+      displayOnPage(result);
+      saveToRecords(result);
+    }
+
+    function logToConsole({ name, pan, income, tax, netIncome }) {
+      console.log('TAX RESULT =>', { name, pan, income, tax, netIncome });
+    }
+
+    function displayOnPage({ name, pan, income, tax, netIncome }) {
+      const lines = [
+        'Income Tax Calculator (Multiple Callbacks)',
+        `Name: ${name}`,
+        `PAN: ${pan}`,
+        `Annual Income: ${inr(income)}`,
+        `Calculated Tax: ${inr(tax)}`,
+        `Net Income: ${inr(netIncome)}`
+      ];
+      document.getElementById('output').textContent = lines.join('\n');
+    }
+
+    function saveToRecords(result) {
+      records.push(result);
+      document.getElementById('records').textContent = JSON.stringify(records, null, 2);
+    }
+
+    document.getElementById('calcBtn').addEventListener('click', function () {
+      const name = document.getElementById('name').value.trim();
+      const pan = document.getElementById('pan').value.trim();
+      const income = Number(document.getElementById('income').value);
+
+      if (!name || !pan || isNaN(income) || income < 0) {
+        alert('Please enter valid details.');
+        return;
+      }
+
+      processTax(name, pan, income, handleResult);
+    });
+  </script>
+</body>
+</html>

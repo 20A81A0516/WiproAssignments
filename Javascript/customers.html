@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Bank Customers - Array Demo</title>
+</head>
+<body>
+  <div class="box">
+    <h2>Bank Customers — Dynamic Array Demo</h2>
+    <p>Click the button to register customers and see the array operations.</p>
+    <button id="startBtn">Start Registration</button>
+
+    <h3>Output</h3>
+    <pre id="out">No output yet. Click "Start Registration".</pre>
+  </div>
+
+  <script>
+    document.getElementById('startBtn').addEventListener('click', runDemo);
+
+    function runDemo() {
+      const outEl = document.getElementById('out');
+      let out = '';
+
+      let nStr = prompt('How many customers do you want to register? (enter a number)\n\nTip: Cancel to use sample: Raj, Priya, Karthik');
+      if (nStr === null) {
+        var customers = ['Raj', 'Priya', 'Karthik'];
+        out += 'You cancelled registration prompts — using sample names.\n\n';
+      } else {
+        let n = parseInt(nStr, 10);
+        if (isNaN(n) || n <= 0) {
+          alert('Invalid number — using sample names instead.');
+          var customers = ['Raj', 'Priya', 'Karthik'];
+        } else {
+          var customers = []; 
+          for (let i = 0; i < n; i++) {
+            let name = prompt(`Enter name of customer ${i}:`);
+            if (name === null || name.trim() === '') {
+              name = `Customer${i}`;
+            }
+            customers.push(name.trim());
+          }
+        }
+      }
+
+      out += 'Original Customers: ' + customers.join(', ') + '\n\n';
+
+      out += 'Customers using for...of:\n';
+      for (const c of customers) {
+        out += c + '\n';
+      }
+      out += '\n';
+
+      out += 'Customer IDs using for...in:\n';
+      for (const idx in customers) {
+        out += idx + '\n';
+      }
+      out += '\n';
+
+      customers.push('Anita');
+      out += `After push('Anita'): ` + customers.join(', ') + '\n';
+
+      customers.pop();
+      out += 'After pop(): ' + customers.join(', ') + '\n';
+
+      customers.splice(1, 0, 'Vikram');
+      out += "After insert: 'Vikram' at position 1: " + customers.join(', ') + '\n';
+
+      customers.splice(2, 1);
+      out += 'After delete at position 2: ' + customers.join(', ') + '\n\n';
+
+      out += 'Final Customers: ' + customers.join(', ') + '\n';
+
+      outEl.textContent = out;
+    }
+  </script>
+</body>
+</html>
+
+
+
+<!-- Output
+Original Customers: moon, tara
+
+Customers using for...of:
+moon
+tara
+
+Customer IDs using for...in:
+0
+1
+
+After push('Anita'): moon, tara, Anita
+After pop(): moon, tara
+After insert: 'Vikram' at position 1: moon, Vikram, tara
+After delete at position 2: moon, Vikram
+
+Final Customers: moon, Vikram -->

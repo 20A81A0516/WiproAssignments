@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tour Booking Form</title>
+</head>
+<body>
+  <div class="card">
+    <h1>Tour Booking Form</h1>
+
+    <form id="bookingForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" required/>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" required/>
+
+      <label for="destination">Destination</label>
+      <select id="destination" required>
+        <option value="">--Select--</option>
+        <option value="Ooty">Ooty</option>
+        <option value="Goa">Goa</option>
+        <option value="Manali">Manali</option>
+      </select>
+
+      <label for="days">Number of Days</label>
+      <input type="number" id="days" min="1" required/>
+
+      <label for="travelers">Number of Travelers</label>
+      <input type="number" id="travelers" min="1" required/>
+
+      <button type="button" id="bookBtn">Book Now</button>
+    </form>
+
+    <pre id="output" class="output"></pre>
+  </div>
+
+  <script>
+    document.getElementById('bookBtn').addEventListener('click', function () {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const dest = document.getElementById('destination').value;
+      const days = Number(document.getElementById('days').value);
+      const travelers = Number(document.getElementById('travelers').value);
+
+      if (!name || !email || !dest || days <= 0 || travelers <= 0) {
+        alert('Please fill all fields correctly.');
+        return;
+      }
+
+      const prices = { Ooty: 2000, Goa: 3000, Manali: 4000 };
+      const total = prices[dest] * days * travelers;
+
+      const lines = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Destination: ${dest}`,
+        `Days: ${days}`,
+        `Travelers: ${travelers}`,
+        `Total Price: ₹${total}`
+      ];
+      document.getElementById('output').textContent = lines.join('\n');
+    });
+  </script>
+</body>
+</html>
+
+
+
+<!-- Tour Booking Form
+Name: Karthik
+Email: karthik@gmail.com
+Destination: Manali
+Days: 7
+Travelers: 4
+Total Price: ₹112000 -->

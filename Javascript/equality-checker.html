@@ -1,0 +1,62 @@
+ <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Equality & Inequality Comparison</title>
+</head>
+<body>
+
+<div class="card">
+  <h2>Equality & Inequality Checker</h2>
+
+  <label>First Value:</label>
+  <input type="text" id="value1" placeholder="Enter first value">
+
+  <label>Second Value:</label>
+  <input type="text" id="value2" placeholder="Enter second value">
+
+  <button onclick="compareValues()">Compare</button>
+
+  <h3>Result:</h3>
+  <pre id="output">No comparison yet.</pre>
+</div>
+
+<script>
+function compareValues() {
+    let val1 = document.getElementById("value1").value;
+    let val2 = document.getElementById("value2").value;
+
+    let numVal2 = Number(val2);
+
+    let type1 = typeof val1;
+    let type2 = typeof numVal2;
+
+    let eq   = (val1 == numVal2) + " → Equality ignores type";
+    let seq  = (val1 === numVal2) + " → Strict equality checks type too";
+    let neq  = (val1 != numVal2) + " → Values considered equal";
+    let sneq = (val1 !== numVal2) + " → Strict inequality because types differ";
+
+    let result = `First Value: ${val1} (${type1})
+Second Value: ${numVal2} (${type2})
+
+Using == : ${eq}
+Using === : ${seq}
+Using != : ${neq}
+Using !== : ${sneq}`;
+
+    document.getElementById("output").textContent = result;
+}
+</script>
+</body>
+</html>
+
+
+<!-- Result:
+First Value: 10 (string)
+Second Value: 10 (number)
+
+Using == : true → Equality ignores type
+Using === : false → Strict equality checks type too
+Using != : false → Values considered equal
+Using !== : true → Strict inequality because types differ -->
+ 

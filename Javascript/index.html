@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alert • Confirm • Prompt – Quiz</title>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Alert, Confirm & Prompt – Quiz</h1>
+    <p>If the pop-ups didn’t show, click the button below to try again.</p>
+    <button onclick="runQuiz()">Start Quiz Again</button>
+  </div>
+
+  <script>
+    function runQuiz() {
+      alert("Welcome to the Mini Quiz!");
+
+      let name = prompt("What's your name?");
+      if (name === null) {
+        alert("No problem. Reload the page or click the button to try again.");
+        return;
+      }
+      name = name.trim() || "Friend";
+
+      const ok = confirm(`Hi ${name}! Are you ready for the quiz?`);
+      if (!ok) {
+        alert("Okay, come back when you're ready. Bye!");
+        return;
+      }
+
+      const q = "Which planet is known as the Red Planet?\n" +
+                "A) Earth\nB) Mars\nC) Venus\n\nType A, B, or C:";
+      const ans = prompt(q);
+      if (ans === null) { alert("Quiz cancelled."); return; }
+
+      const a = ans.trim().toUpperCase();
+
+      if (a === "B" || a === "MARS" || a === "2") {
+        alert(`Correct, ${name}! 🎉 The answer is B) Mars.`);
+      } else {
+        alert(`Oops, ${name}. That's not right.\nCorrect answer: B) Mars.`);
+      }
+    }
+
+    window.addEventListener("load", runQuiz);
+  </script>
+</body>
+</html>

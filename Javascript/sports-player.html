@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sports Team Player Details (Destructuring)</title>
+</head>
+<body>
+  <div class="card">
+    <h1>Sports Team Player Details</h1>
+    <button id="showBtn">Show Player Details</button>
+    <pre id="output" class="output"></pre>
+  </div>
+
+  <script>
+    const player1 = {
+      name: "Virat Kohli",
+      age: 36,
+      sport: "Cricket",
+      stats: { matches: 500, runs: 25000, average: 57.2 }
+    };
+
+    const player2 = {
+      name: "Lionel Messi",
+      age: 36,
+      sport: "Football",
+      stats: { matches: 800, goals: 720, assists: 300 }
+    };
+
+    const players = [player1, player2];
+
+    function buildOutput() {
+      const [cricketer, footballer] = players;
+
+      const { name, sport, stats: { matches, runs, average } } = cricketer;
+      const out1 = `Player ${name} plays ${sport}.
+Matches: ${matches} | Runs: ${runs} | Batting Average: ${average}`;
+
+      const { name: n2, sport: s2, stats: { matches: m2, goals, assists } } = footballer;
+      const out2 = `Player ${n2} plays ${s2}.
+Matches: ${m2} | Goals: ${goals} | Assists: ${assists}`;
+
+      return out1 + "\n\n" + out2;
+    }
+
+    document.getElementById('showBtn').addEventListener('click', function () {
+      document.getElementById('output').textContent = buildOutput();
+    });
+
+    document.getElementById('output').textContent = buildOutput();
+  </script>
+</body>
+</html>
+
+
+
+<!-- Sports Team Player Details
+Show Player Details
+Player Virat Kohli plays Cricket.
+Matches: 500 | Runs: 25000 | Batting Average: 57.2
+
+Player Lionel Messi plays Football.
+Matches: 800 | Goals: 720 | Assists: 300 -->

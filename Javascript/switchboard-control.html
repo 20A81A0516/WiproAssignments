@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Switchboard Control (let, var, const)</title>
+</head>
+<body>
+  <div class="card">
+    <h1>Switchboard Control</h1>
+    <pre id="output" class="output"></pre>
+  </div>
+
+  <script>
+    const buildingName = "Sunrise Apartments";
+
+    let status = "OFF";
+
+    const devices = ["Light", "Fan", "AC"];
+    const lines = [];
+
+    for (var i = 0; i < devices.length; i++) {
+      status = (status === "OFF") ? "ON" : "OFF";
+      lines.push(`Checking Switch ${i + 1}: ${devices[i]} is ${status}`);
+    }
+
+    lines.push(`All switches checked for ${buildingName}.`);
+    lines.push(`Outside loop: var counter is ${i}`);
+
+    document.getElementById("output").textContent = lines.join("\n");
+
+    try {
+      buildingName = "Another Building";
+    } catch (err) {
+      console.error(err.message);
+    }
+  </script>
+</body>
+</html>
+
+
+
+<!-- Switchboard Control
+Checking Switch 1: Light is ON
+Checking Switch 2: Fan is OFF
+Checking Switch 3: AC is ON
+All switches checked for Sunrise Apartments.
+Outside loop: var counter is 3 -->

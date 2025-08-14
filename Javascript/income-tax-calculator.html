@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Income Tax Calculator</title>
+</head>
+<body>
+  <div class="card">
+    <h2>Income Tax Calculator</h2>
+    <form id="taxForm">
+      <label>Full Name</label>
+      <input type="text" id="name" placeholder="Enter full name" required>
+
+      <label>PAN Number (10 characters)</label>
+      <input type="text" id="pan" placeholder="ABCDE1234F" maxlength="10" required>
+
+      <label>Date of Birth</label>
+      <input type="date" id="dob" required>
+
+      <label>Annual Income (₹)</label>
+      <input type="number" id="income" placeholder="e.g. 750000" min="0" step="1" required>
+
+      <button type="submit">Calculate Tax</button>
+      <div id="msg" class="error" aria-live="polite"></div>
+    </form>
+
+    <h3>Result</h3>
+    <pre id="result">No calculation yet. Fill the form and click "Calculate Tax".</pre>
+  </div>
+
+  <script>
+    function calculateTax(amount) {
+      let tax = 0;
+      if (amount > 250000) {
+        const slab2 = Math.min(amount, 500000) - 250000;
+        tax += Math.max(0, slab2) * 0.05;
+      }
+      if (amount > 500000) {
+        const slab3 = Math.min(amount, 1000000) - 500000;
+        tax += Math.max(0, slab3) * 0.20;
+      }
+      if (amount > 1000000) {
+        const slab4 = amount - 1000000;
+        tax += Math.max(0, slab4) * 0.30;
+      }
+      return Math.round(tax);
+    }
+
+    function computeAge(dobStr) {
+      const dob = new Date(dobStr);
+      if (isNaN(dob)) return null;
+      const today = new Date();
+      let age = today.getFullYear() - dob.getFullYear();
+      const m = today.getMonth() - dob.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+      return age;
+    }
+
+    function validatePAN(rawPan) {
+      const pan = (rawPan || '').trim().toUpperCase();
+      const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
+      return { ok: panRegex.test(pan), pan };
+    }
+
+    document.getElementById('taxForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('msg').textContent = '';
+      const name = (document.getElementById('name').value || '').trim();
+      const panInput = document.getElementById('pan').value;
+      const dob = document.getElementById('dob').value;
+      const incomeVal = Number(document.getElementById('income').value);
+
+      if (!name) { document.getElementById('msg').textContent = 'Please enter your name.'; return; }
+      const panCheck = validatePAN(panInput);
+      if (!panCheck.ok) { document.getElementById('msg').textContent = 'Invalid PAN. It must be 10 characters (e.g. ABCDE1234F) in uppercase.'; return; }
+      const age = computeAge(dob);
+      if (age === null || age < 0) { document.getElementById('msg').textContent = 'Please enter a valid Date of Birth.'; return; }
+      if (!Number.isFinite(incomeVal) || incomeVal < 0) { document.getElementById('msg').textContent = 'Please enter a valid annual income.'; return; }
+
+      const tax = calculateTax(incomeVal);
+
+      const output = [
+        `Name : ${name.toUpperCase()}`,
+        `PAN : ${panCheck.pan}`,
+        `Age : ${age} years`,
+        `Annual Income : ₹${Math.round(incomeVal)}`,
+        `Calculated Tax : ₹${tax}`
+      ].join('\n');
+
+      document.getElementById('result').textContent = output;
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+<!-- Result
+Name : ABHI
+PAN : ABDCE3467F
+Age : 24 years
+Annual Income : ₹500000
+Calculated Tax : ₹12500 -->

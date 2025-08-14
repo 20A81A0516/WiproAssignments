@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<script>
+		const ShopInventory = (function() {
+			let totalItems = 0; 
+
+			return {
+				increaseStock: function(amount) {
+					totalItems += amount;
+					document.write("Stock after adding: " + totalItems + "<br>");
+				},
+				processSale: function(amount) {
+					if (amount <= totalItems) {
+						totalItems -= amount;
+						document.write("Sold " + amount + " items.<br>");
+					} else {
+						document.write("Insufficient stock<br>");
+					}
+				},
+				checkStock: function() {
+					return totalItems;
+				}
+			};
+		})();
+
+		ShopInventory.increaseStock(10);
+		ShopInventory.processSale(3);
+		document.write("Stock remaining: " + ShopInventory.checkStock());
+	</script>
+</body>
+</html>
+
+
+
+<!-- Stock after adding: 10
+Sold 3 items.
+Stock remaining: 7 -->

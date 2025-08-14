@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Share Market</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    body { background: #f5f6f7 }
+    footer { color: #6c757d }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Share Market</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+              aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Market Trends</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Top Gainers</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Top Losers</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-4">
+
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Top Gainer</h5>
+            <div class="d-flex align-items-center gap-3">
+              <i class="fab fa-apple" style="font-size: 2rem; color:black;"></i>
+              <div>
+                <div class="fw-bold">AAPL</div>
+                <p class="card-text text-muted mb-0">$150.00</p>
+              </div>
+            </div>
+            <div class="mt-3 text-success fw-bold">+2.15%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Top Loser</h5>
+            <div class="d-flex align-items-center gap-3">
+              <i class="fab fa-google" style="font-size: 2rem; color:#4285F4;"></i>
+              <div>
+                <div class="fw-bold">GOOG</div>
+                <p class="card-text text-muted mb-0">$2,800.00</p>
+              </div>
+            </div>
+            <div class="mt-3 text-danger fw-bold">-1.05%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Most Active</h5>
+            <div class="d-flex align-items-center gap-3">
+              <i class="fab fa-amazon" style="font-size: 2rem; color:#ff9900;"></i>
+              <div>
+                <div class="fw-bold">AMZN</div>
+                <p class="card-text text-muted mb-0">5,000,000</p>
+              </div>
+            </div>
+            <div class="mt-3 text-secondary">Volume traded</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3 mt-1">
+      <div class="col-md-6">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Trending Stocks</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between">
+                <span>AAPL</span><span class="text-success">+2.15%</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>MSFT</span><span class="text-success">+1.25%</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>TSLA</span><span class="text-danger">-0.75%</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>FB</span><span class="text-success">+0.80%</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Market Summary</h5>
+            <p class="card-text">
+              The share market has been performing positively, with major indices showing an upward trend.
+              Investors are optimistic about the economic recovery and corporate earnings.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-3">
+
+    <footer class="text-center small my-4">
+      Data for educational purposes only — Share Market 2025
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

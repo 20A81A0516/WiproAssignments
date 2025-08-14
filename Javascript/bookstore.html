@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Book Store Management (JSON)</title>
+</head>
+<body>
+  <div class="card">
+    <h2>Book Store Management (JSON)</h2>
+    <p>Initial sample books are loaded. Use the buttons and forms to manage the JSON array.</p>
+
+    <div class="row">
+      <button id="showAllBtn">Show All Books</button>
+      <button id="showAvailableBtn" class="secondary">Show Available Books</button>
+    </div>
+
+    <hr>
+
+    <h3>Add a New Book</h3>
+    <label>Title</label>
+    <input id="addTitle" type="text" placeholder="e.g. New Book Title">
+
+    <label>Author</label>
+    <input id="addAuthor" type="text" placeholder="e.g. Author Name">
+
+    <label>Price (₹)</label>
+    <input id="addPrice" type="number" min="0" placeholder="e.g. 450">
+
+    <div class="row" style="align-items:center; margin-top:8px;">
+      <label style="margin:0;">
+        <input id="addAvailable" type="checkbox" checked> Available
+      </label>
+      <button id="addBtn">Add Book</button>
+    </div>
+
+    <hr>
+
+    <h3>Update Price</h3>
+    <label>Select Book</label>
+    <select id="updateSelect"></select>
+
+    <label>New Price (₹)</label>
+    <input id="updatePrice" type="number" min="0" placeholder="e.g. 500">
+
+    <div class="row" style="margin-top:8px;">
+      <button id="updateBtn">Update Price</button>
+    </div>
+
+    <hr>
+
+    <h3>Delete a Book</h3>
+    <label>Select Book to Delete</label>
+    <select id="deleteSelect"></select>
+    <div class="row" style="margin-top:8px;">
+      <button id="deleteBtn" class="secondary">Delete Book</button>
+    </div>
+
+    <h3>Output</h3>
+    <pre id="output">No actions yet. Click "Show All Books" to begin.</pre>
+  </div>
+
+  <script>
+    const books = [
+      { title: "JavaScript Basics", author: "Anu", price: 450, available: true },
+      { title: "HTML & CSS", author: "Devi", price: 350, available: false },
+      { title: "Node.js Guide", author: "Ravi", price: 600, available: true }
+    ];
+
+    const outEl = document.getElementById('output');
+    const showAllBtn = document.getElementById('showAllBtn');
+    const showAvailableBtn = document.getElementById('showAvailableBtn');
+    const addBtn = document.getElementById('addBtn');
+    const updateBtn = document.getElementById('updateBtn');
+    const deleteBtn = document.getElementById('deleteBtn');
+
+    const updateSelect = document.getElementById('updateSelect');
+    const deleteSelect = document.getElementById('deleteSelect');
+
+    function refreshSelects() {
+      updateSelect.innerHTML = '';
+      deleteSelect.innerHTML = '';
+
+      books.forEach((b, i) => {
+        const opt1 = document.createElement('option');
+        opt1.value = i;
+        opt1.textContent = `${b.title} — ₹${b.price}`;
+        updateSelect.appendChild(opt1);
+
+        const opt2 = document.createElement('option');
+        opt2.value = i;
+        opt2.textContent = `${b.title}`;
+        deleteSelect.appendChild(opt2);
+      });
+    }
+
+    function displayAllBooks() {
+      let out = 'All Books:\n';
+      for (const book of books) {
+        out += `Title: ${book.title}, Author: ${book.author}, Price: ₹${book.price}, Available: ${book.available}\n`;
+      }
+      outEl.textContent = out;
+    }
+
+    function displayAvailableBooks() {
+      let out = 'Available Books:\n';
+      for (const book of books) {
+        if (book.available) {
+          out += `Title: ${book.title}, Author: ${book.author}, Price: ₹${book.price}\n`;
+        }
+      }
+      outEl.textContent = out;
+    }
+
+    function addBook() {
+      const title = document.getElementById('addTitle').value.trim();
+      const author = document.getElementById('addAuthor').value.trim();
+      const priceRaw = document.getElementById('addPrice').value;
+      const available = document.getElementById('addAvailable').checked;
+
+      if (!title || !author || priceRaw === '') {
+        alert('Please provide Title, Author and Price to add a book.');
+        return;
+      }
+
+      const price = Math.round(Number(priceRaw));
+      books.push({ title, author, price, available });
+
+      outEl.textContent = 'After Adding:\n' + books.map(b => b.title).join(', ') + '\n';
+      refreshSelects();
+
+      document.getElementById('addTitle').value = '';
+      document.getElementById('addAuthor').value = '';
+      document.getElementById('addPrice').value = '';
+      document.getElementById('addAvailable').checked = true;
+    }
+
+    function updatePrice() {
+      const idx = Number(updateSelect.value);
+      const newPriceRaw = document.getElementById('updatePrice').value;
+      if (isNaN(idx)) { alert('No book selected.'); return; }
+      if (newPriceRaw === '') { alert('Enter a new price.'); return; }
+
+      const newPrice = Math.round(Number(newPriceRaw));
+      books[idx].price = newPrice;
+
+      outEl.textContent = `After Price Update:\n${books[idx].title} → ₹${books[idx].price}\n`;
+      refreshSelects();
+      document.getElementById('updatePrice').value = '';
+    }
+
+    function deleteBook() {
+      const idx = Number(deleteSelect.value);
+      if (isNaN(idx)) { alert('No book selected.'); return; }
+
+      const removed = books.splice(idx, 1); 
+      outEl.textContent = 'After Deletion:\n' + books.map(b => b.title).join(', ') + '\n';
+      refreshSelects();
+    }
+
+    showAllBtn.addEventListener('click', displayAllBooks);
+    showAvailableBtn.addEventListener('click', displayAvailableBooks);
+    addBtn.addEventListener('click', addBook);
+    updateBtn.addEventListener('click', updatePrice);
+    deleteBtn.addEventListener('click', deleteBook);
+
+    refreshSelects();
+    displayAllBooks();
+  </script>
+</body>
+</html>
+
+
+<!-- All Books:
+Title: JavaScript Basics, Author: Anu, Price: ₹450, Available: true
+Title: HTML & CSS, Author: Devi, Price: ₹350, Available: false
+Title: Node.js Guide, Author: Ravi, Price: ₹600, Available: true
+Title: java, Author: diana, Price: ₹750, Available: true
+
+After Price Update:
+JavaScript Basics → ₹600
+
+
+After Deletion:
+HTML & CSS, Node.js Guide, java -->

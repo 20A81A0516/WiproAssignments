@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JS Closure: Share Portfolio</title>
+</head>
+<body>
+  <div class="card">
+    <h1>Share Portfolio (Closure)</h1>
+
+    <div class="grid">
+      <label>Company
+        <input id="company" placeholder="e.g., TCS" />
+      </label>
+      <label>Quantity
+        <input id="qty" type="number" min="1" value="1" />
+      </label>
+      <label>Price/Share (₹)
+        <input id="price" type="number" min="1" value="100" />
+      </label>
+    </div>
+
+    <div class="btns">
+      <button id="buyBtn">Buy</button>
+      <button id="sellBtn">Sell</button>
+      <button id="valueBtn">Show Total Value</button>
+      <button id="demoBtn" class="ghost">Run Sample</button>
+    </div>
+
+    <pre id="out" class="output"></pre>
+  </div>
+
+  <script>
+    function createPortfolio() {
+      const holdings = new Map(); 
+
+      function buyShare(company, qty, price) {
+        const rec = holdings.get(company) || { qty: 0, price: price };
+        const newQty = rec.qty + qty;
+        rec.price = Math.round(((rec.qty * rec.price) + (qty * price)) / newQty);
+        rec.qty = newQty;
+        holdings.set(company, rec);
+        return `Bought ${qty} shares of ${company} at ₹${price} each.`;
+      }
+
+      function sellShare(company, qty) {
+        const rec = holdings.get(company);
+        if (!rec || rec.qty < qty) return `Cannot sell ${qty} of ${company}.`;
+        rec.qty -= qty;
+        if (rec.qty === 0) holdings.delete(company);
+        else holdings.set(company, rec);
+        return `Sold ${qty} shares of ${company}.`;
+      }
+
+      function totalValue() {
+        let sum = 0;
+        holdings.forEach(({ qty, price }) => { sum += qty * price; });
+        return sum; 
+      }
+
+      return { buyShare, sellShare, totalValue };
+    }
+
+    const pf = createPortfolio();
+    const $ = (id) => document.getElementById(id);
+    const inr = (n) => '₹' + Number(n).toLocaleString('en-IN');
+
+    function msg(line) { $('out').textContent += line + '\n'; }
+
+    $('buyBtn').onclick = () => {
+      const c = $('company').value.trim() || 'UNKNOWN';
+      const q = Math.max(1, Number($('qty').value));
+      const p = Math.max(1, Number($('price').value));
+      msg(pf.buyShare(c, q, p));
+    };
+
+    $('sellBtn').onclick = () => {
+      const c = $('company').value.trim() || 'UNKNOWN';
+      const q = Math.max(1, Number($('qty').value));
+      msg(pf.sellShare(c, q));
+    };
+
+    $('valueBtn').onclick = () => {
+      msg('Portfolio Value: ' + inr(pf.totalValue()));
+    };
+
+    $('demoBtn').onclick = () => {
+      $('out').textContent = ''; 
+      msg(pf.buyShare('TCS', 10, 3500));
+      msg(pf.buyShare('Infosys', 5, 1500));
+      msg(pf.sellShare('TCS', 3));
+      msg('Portfolio Value: ' + inr(10*3500 + 5*1500));
+    };
+  </script>
+</body>
+</html>
+
+
+
+
+<!-- Share Portfolio (Closure)
+Bought 10 shares of TCS at ₹3500 each.
+Bought 5 shares of Infosys at ₹1500 each.
+Sold 3 shares of TCS.
+Portfolio Value: ₹42,500
+Bought 1 shares of TCS at ₹100 each.
+Sold 1 shares of TCS.
+Portfolio Value: ₹29,025 -->
