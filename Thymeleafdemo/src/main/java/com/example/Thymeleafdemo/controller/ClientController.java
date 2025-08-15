@@ -26,6 +26,11 @@ public class ClientController {
         model.addAttribute("client", new Client());
         return "new_client";
     }
+    @PostMapping("/update")
+    public String updateClient(@ModelAttribute("client") Client client) {
+        service.save(client); // service.save() can update if the id exists
+        return "redirect:/";
+    }
 
     @PostMapping("/save")
     public String saveClient(@ModelAttribute("client") Client client) {
